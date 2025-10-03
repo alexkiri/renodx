@@ -28,6 +28,7 @@ void main(
   r0.xyz = r2.xyz + r0.xyz;
   r0.xyz = float3(0.316260993, 0.316260993, 0.316260993) * r0.xyz;
   r2.xyzw = t0.Sample(s0_s, v1.xy).xyzw;
+  float4 r3 = r2;
   r0.xyz = r2.xyz * float3(0.227026999, 0.227026999, 0.227026999) + r0.xyz;
   r1.xz = v1.xx;
   r2.xyzw = t0.Sample(s0_s, r1.xy).xyzw;
@@ -42,5 +43,8 @@ void main(
   } else {
     o0 = max(0, o0);
   }
+  
+  o0 = o0 * CUSTOM_BACKGROUND_BLUR + r3 * (1.0 - CUSTOM_BACKGROUND_BLUR);
+
   return;
 }

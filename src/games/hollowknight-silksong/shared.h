@@ -60,6 +60,7 @@ struct ShaderInjectData {
   float custom_hero_light;
   float custom_hdr_videos;
   float custom_vignette;
+  float custom_background_blur;
   float custom_saturation_clip;
   float custom_bloom_clip;
   float custom_hue_clip;
@@ -104,6 +105,7 @@ cbuffer shader_injection : register(b13) {
 #define CUSTOM_HERO_LIGHT                          shader_injection.custom_hero_light
 #define CUSTOM_HDR_VIDEOS                          shader_injection.custom_hdr_videos
 #define CUSTOM_VIGNETTE                            shader_injection.custom_vignette
+#define CUSTOM_BACKGROUND_BLUR                     shader_injection.custom_background_blur
 #define CUSTOM_SATURATION_CLIP                     shader_injection.custom_saturation_clip
 #define CUSTOM_BLOOM_CLIP                          shader_injection.custom_bloom_clip
 #define CUSTOM_HUE_CLIP                            shader_injection.custom_hue_clip

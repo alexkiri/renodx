@@ -352,6 +352,15 @@ renodx::utils::settings::Settings settings = {
         .parse = [](float value) { return value * 0.01f; },
     },
     new renodx::utils::settings::Setting{
+        .key = "FxBackgroundBlur",
+        .binding = &shader_injection.custom_background_blur,
+        .default_value = 100.f,
+        .label = "Background Blur",
+        .section = "Effects",
+        .max = 100.f,
+        .parse = [](float value) { return value * 0.01f; },
+    },
+    new renodx::utils::settings::Setting{
         .key = "FxBloom",
         .binding = &shader_injection.custom_bloom,
         .default_value = 50.f,
@@ -512,6 +521,7 @@ void OnPresetOff() {
       {"FxSaturationClip", 100.f},
       {"FxHueClip", 100.f},
       {"FxVignette", 100.f},
+      {"FxBackgroundBlur", 100.f},
       {"FxBloom", 50.f},
       {"FxHeroLight", 50.f},
       {"FxGrainStrength", 0.f},
