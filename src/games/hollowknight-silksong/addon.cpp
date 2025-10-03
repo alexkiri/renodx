@@ -709,18 +709,6 @@ BOOL APIENTRY DllMain(HMODULE h_module, DWORD fdw_reason, LPVOID lpv_reserved) {
             .ignore_size = true,
         });
 
-        // TODO: attempt to make the resolution of the BlurredBackground render target bigger. not yet working
-        renodx::mods::swapchain::swap_chain_upgrade_targets.push_back({
-          .old_format = reshade::api::format::r8g8b8a8_typeless,
-          .new_format = reshade::api::format::r16g16b16a16_float,
-          // .use_resource_view_hot_swap = true,
-          .use_resource_view_cloning = true,
-          .dimensions = {.width = 640, .height = 360},
-          .new_dimensions = {.width = 1920, .height = 1080},
-          .usage_include = reshade::api::resource_usage::render_target,
-          // .use_resource_view_cloning_and_upgrade = true,
-        });
-
         renodx::utils::random::binds.push_back(&shader_injection.custom_random);
         renodx::utils::random::binds.push_back(&shader_injection.swap_chain_output_dither_seed);
         renodx::utils::settings::on_preset_changed_callbacks.emplace_back(&HandleOutputModeChange);
