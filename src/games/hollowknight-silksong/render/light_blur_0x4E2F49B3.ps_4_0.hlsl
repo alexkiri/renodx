@@ -21,7 +21,9 @@ void main(
   float4 fDest;
 
   r0.xz = v1.xx;
-  r1.xyzw = cb0[2].yyyy * float4(1.38461494, 3.23076892, -0.615384996, -2.76923108) + v1.yyyy;
+  float offsetCorrection = -0.307691946;
+  float4 offsetCorrectionFloat4 = cb0[2].y * float4(offsetCorrection, offsetCorrection, offsetCorrection, offsetCorrection);
+  r1.xyzw = cb0[2].yyyy * float4(1.38461494, 3.23076892, -0.615384996, -2.76923108) + v1.yyyy + offsetCorrectionFloat4;
   r0.yw = r1.xz;
   r2.xyzw = t0.Sample(s0_s, r0.xy).xyzw;
   r0.xyzw = t0.Sample(s0_s, r0.zw).xyzw;

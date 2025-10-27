@@ -19,7 +19,9 @@ void main(
   uint4 bitmask, uiDest;
   float4 fDest;
 
-  r0.xyzw = cb0[2].xxxx * float4(3.23076892, 1.38461494, -2.76923108, -0.615384996) + v1.xxxx;
+  float offsetCorrection = -0.307691946;
+  float4 offsetCorrectionFloat4 = cb0[2].x * float4(offsetCorrection, offsetCorrection, offsetCorrection, offsetCorrection);
+  r0.xyzw = cb0[2].xxxx * float4(3.23076892, 1.38461494, -2.76923108, -0.615384996) + v1.xxxx + offsetCorrectionFloat4;
   r1.xz = r0.yw;
   r1.yw = v1.yy;
   r2.xyzw = t0.Sample(s0_s, r1.xy).xyzw;
