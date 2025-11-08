@@ -27,8 +27,12 @@ void main(
   r2.xyzw = t0.Sample(s0_s, v1.xy).xyzw;
 
   if (CUSTOM_GRAIN_TYPE == 0.f) {
-    r2.xyz = saturate(r2.xyz);
-
+    [branch]
+    if (RENODX_TONE_MAP_TYPE == 0.f) {
+      r2.xyz = saturate(r2.xyz);
+    } else {
+      r2.xyz = max(0, r2.xyz);
+    }
     o0.w = r2.w;
     r3.xyz = float3(-0.5, -0.5, -0.5) + r2.xyz;
     r3.xyz = -r3.xyz * float3(2, 2, 2) + float3(1, 1, 1);
@@ -39,8 +43,12 @@ void main(
     r0.xyz = r2.xyz * r0.xyz;
     r0.xyz = r0.xyz + r0.xyz;
     o0.xyz = r3.xyz * r1.xyz + r0.xyz;
-
-    o0 = saturate(o0);
+    [branch]
+    if (RENODX_TONE_MAP_TYPE == 0.f) {
+      o0 = saturate(o0);
+    } else {
+      o0 = max(0, o0);
+    }
   } else if (CUSTOM_GRAIN_TYPE == 1.f) {
     float3 linear_color = renodx::color::srgb::Decode(r2.xyz);
     float3 grained = renodx::effects::ApplyFilmGrain(
