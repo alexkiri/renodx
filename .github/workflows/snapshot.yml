@@ -3,7 +3,7 @@ name: snapshot
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [zmain]
     paths-ignore:
       - "**/*.md"
       - "docs/**"
